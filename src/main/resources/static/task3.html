@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>被災住宅金融支援申請</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+        }
+        h2{
+            font-size: 22px;
+            text-align: center;
+            margin: 20px auto;
+        }
+        table{
+            margin: auto;
+            text-align: center;
+            border-collapse: collapse;
+            table-layout: auto;
+        }
+        thead{
+            background-color: aquamarine;
+        }
+        td{
+            border: solid 0.2px;
+            width: 300px;
+        }
+        th{
+            border: solid 0.2px;
+        }
+        .button{
+            width: 100px;
+            height: 30px;
+            line-height: 15px;
+            background: #2e82ff;
+            color: #ffffff;
+            font-size: 13px;
+            border-radius: 13px;
+            text-align: center;
+            border: none;
+        }
+        #applierinfo{
+            display: block;
+            text-align: right;
+        }
+        #guaranteeinfo{
+            display: block;
+            text-align: right;
+        }
+        #userid{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <span id="applierinfo"></span>
+    <span id="guaranteeinfo"></span>
+    <h2>被災住宅金融支援申請</h2>
+    <br><br>
+    <table class="housesituation">
+        <thead>
+            <tr>
+                <th colspan="2">被災住宅の状況</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>被災住宅の種類</td>
+                <td>
+                    <select id="housetype">
+                        <option value="">選択してください</option>
+                        <option value="マイホーム">マイホーム</option>
+                        <option value="賃貸住宅">賃貸住宅</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>被災住宅の所有等</td>
+                <td>
+                    <select id="housebelongsto">
+                        <option value="">選択してください</option>
+                        <option value="申込本人が所有している" id="show1">申込本人が所有している</option>
+                        <option value="申込本人が借りている">申込本人が借りている</option>
+                        <option value="上記以外" id="show2">上記以外</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>被害状況</td>
+                <td>
+                    <select id="damagesituation">
+                        <option value="">選択してください</option>
+                        <option value="01全壊">01全壊</option>
+                        <option value="02大規模半壊">02大規模半壊</option>
+                        <option value="03半壊">03半壊</option>
+                        <option value="04避難指示あり">04避難指示あり</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>被災住宅の修理が不能又は困難である</td>
+                <td>
+                    困難である<input type="checkbox" value="困難である" id="whetherhasdifficulty">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="landsituation">
+        <thead>
+            <tr>
+                <th colspan="2">敷地状況</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>敷地の面積（㎡）</td>
+                <td>
+                    <input type="text" id="landarea">㎡
+                </td>
+            </tr>
+            <tr>
+                <td>物件_敷地（所在地）_都道府県</td>
+                <td>
+                    <select id="addresstodofuken">
+                        <option value="">選択してください</option>
+                        <option value="東京都">東京都</option>
+                        <option value="北海道">北海道</option>
+                        <option value="大阪府">大阪府</option>
+                        <option value="京都府">京都府</option>
+                        <option value="県">県</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>物件_敷地（所在地）_市郡</td>
+                <td>
+                    <input id="addressshigun">
+                </td>
+            </tr>
+            <tr>
+                <td>物件_敷地（所在地）_町村</td>
+                <td>
+                    <input id="addresschoson">
+                </td>
+            </tr>
+            <tr>
+                <td>物件_敷地（所在地）_番地</td>
+                <td>
+                    <input id="addressbanchi">
+                </td>
+            </tr>
+            <tr>
+                <td>物件_敷地（所在地）_郵便番号</td>
+                <td>
+                    <input id="addresspostcode">
+                </td>
+            </tr>
+            <tr>
+                <td>防災集団移転事業に係る住宅再建を行う</td>
+                <td>
+                    該当<input type="checkbox" id="needtorebuild">
+                </td>
+            </tr>
+            <tr>
+                <td>敷地の所有関係</td>
+                <td>
+                    <select id="landbelongsto">
+                        <option value="">選択してください</option>
+                        <option value="01 所有権">01 所有権</option>
+                        <option value="02 地上権">02 地上権</option>
+                        <option value="03 賃貸借">03 賃貸借</option>
+                        <option value="04 使用貸借">04 使用貸借</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>建物の床面積_住宅部分</td>
+                <td>
+                    <input id="tatemono_jutaku">㎡
+                </td>
+            </tr>
+            <tr>
+                <td>建物の床面積_非住宅部分</td>
+                <td>
+                    <input id="tatemono_hijutaku">㎡
+                </td>
+            </tr>
+            <tr>
+                <td>建物の構造（戸建形式）</td>
+                <td>
+                    <select id="buildamterial">
+                        <option value="">選択してください</option>
+                        <option value="01木作">01木作</option>
+                        <option value="02耐火">02耐火</option>
+                        <option value="03準耐火">03準耐火</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>建て方</td>
+                <td>
+                    <select id="buildtype">
+                        <option value="">選択してください</option>
+                        <option value="01一戸建て">01一戸建て</option>
+                        <option value="02連続建て">02連続建て</option>
+                        <option value="03重ね建て">03重ね建て</option>
+                        <option value="04共同建て">04共同建て</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>入居予定年（年）</td>
+                <td>
+                    <select id="nyukyoyoteidateyear">
+                        <option value="">選択してください</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>入居予定年（月）</td>
+                <td>
+                    <select id="nyukyoyoteidatemonth">
+                        <option value="">選択してください</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>住宅の用途</td>
+                <td>
+                    <select id="housepurpose">
+                        <option value="">選択してください</option>
+                        <option value="01自ら居住する">01自ら居住する</option>
+                        <option value="02親族が居住する">02親族が居住する</option>
+                        <option value="03賃貸住宅">03賃貸住宅</option>
+                        <option value="04その他">04その他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>物件_工事完了予定年月_年</td>
+                <td>
+                    <select id="kojikanryodate_year">
+                        <option value="">選択してください</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>物件_工事完了予定年月_月</td>
+                <td>
+                    <select id="kojikanryodate_Month">
+                        <option value="">選択してください</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="fundscheduledate">
+        <thead>
+            <tr>
+                <th colspan="2">資金の受取予定年月</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>資金の受取予定年月_土地先行資金_年</td>
+            <td>
+                <select id="shikindatetochishikinyear">
+                    <option value="">選択してください</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>資金の受取予定年月_土地先行資金_月</td>
+            <td>
+                <select id="shikindatetochishikinmonth">
+                    <option value="">選択してください</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>資金の受取予定年月_中間資金_年</td>
+            <td>
+                <select id="shikindatechukanshikinyear">
+                    <option value="">選択してください</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>資金の受取予定年月_中間資金_月</td>
+            <td>
+                <select id="shikindatechukanshikinmonth">
+                    <option value="">選択してください</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>資金の受取予定年月_最終資金_年</td>
+            <td>
+                <select id="shikindatesaishushikinyear">
+                    <option value="">選択してください</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>資金の受取予定年月_最終資金_月</td>
+            <td>
+                <select id="shikindatesaishushikinmonth">
+                    <option value="">選択してください</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="constructioncontractor">
+        <thead>
+            <tr>
+                <th colspan="2">工事請負事業者</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>会社名称</td>
+                <td>
+                    <input type="text" id="enterprisename">
+                </td>
+            </tr>
+            <tr>
+                <td>仲介業者又は販売代理_名称（カナ）</td>
+                <td>
+                    <input type="text" id="agencynamekana">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="manincharge">
+        <thead>
+        <tr>
+            <th colspan="2">担当者名</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>仲介業者又は販売代理_担当者名_名</td>
+            <td>
+                <input type="text" id="maninchargemei">
+            </td>
+        </tr>
+        <tr>
+            <td>仲介業者又は販売代理_担当者名_姓</td>
+            <td>
+                <input type="text" id="maninchargesei">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="constructioncost">
+        <thead>
+        <tr>
+            <th colspan="2">建設に要する費用</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>建設費（万円）</td>
+            <td>
+                <input type="text" id="constructioncost">万円
+            </td>
+        </tr>
+        <tr>
+            <td>土地取得費（万円）</td>
+            <td>
+                <input type="text" id="landcost">万円
+            </td>
+        </tr>
+        <tr>
+            <td>費用合計（万円）</td>
+            <td>
+                <input type="text" id="totalcost" disabled>万円
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="loanamount">
+        <thead>
+            <tr>
+                <th colspan="2">災害融資の借入希望額</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>借入希望額_借入金額</td>
+            <td>
+                <input type="text" id="loanamount">万円
+            </td>
+        </tr>
+        <tr>
+            <td>借入希望額_金利(不能超过10.00)</td>
+            <td>
+                <input type="text" id="landinterest">%
+            </td>
+        </tr>
+        <tr>
+            <td>借入希望額_返済期間</td>
+            <td>
+                <input type="text" id="borrowperiod">年
+            </td>
+        </tr>
+        <tr>
+            <td>借入希望額_年間返済額の1/12</td>
+            <td>
+                <input type="text" id="borrowhope">円
+            </td>
+        </tr>
+        <tr>
+            <td>返済方法</td>
+            <td>
+                <select id="borrowtype">
+                    <option value="">選択してください</option>
+                    <option value="01 元利均等返済">01 元利均等返済</option>
+                    <option value="02 元金均等返済">02 元金均等返済</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>被災親族同居の有無</td>
+            <td>
+                <select id="whetherhasrelative">
+                    <option value="">選択してください</option>
+                    <option value="01有">01有</option>
+                    <option value="02無">02無</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>据置期間の年数</td>
+            <td>
+                <select id="installyears">
+                    <option value="">選択してください</option>
+                    <option value="01:1年">01:1年</option>
+                    <option value="02:2年">02:2年</option>
+                    <option value="03:3年">03:3年</option>
+                    <option value="04:4年">04:4年</option>
+                    <option value="05:5年以上">05:5年以上</option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table class="othercontent">
+        <thead>
+            <tr>
+                <th colspan="2">その他の借入内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>その他_借入先名称等</td>
+                <td>
+                    <input type="text" id="otherloanname">
+                </td>
+            </tr>
+            <tr>
+                <td>その他_借入金額（万円）</td>
+                <td>
+                    <input type="text" id="otherloanamount">万円
+                </td>
+            </tr>
+            <tr>
+                <td>その他_返済期間（年）</td>
+                <td>
+                    <input type="text" id="otherloanperiod">年
+                </td>
+            </tr>
+            <tr>
+                <td>その他_年間返済額の1/12（円）</td>
+                <td>
+                    <input type="text" id="dbsonotanenhensai12no1">円
+                </td>
+            </tr>
+            <tr>
+                <td>建設に要する費用（再掲）（万円）</td>
+                <td>
+                    <input type="text" id="otherconstructioncost" disabled>万円
+                </td>
+            </tr>
+            <tr>
+                <td>災害融資の借入希望額、その他の借入内容（万円）</td>
+                <td>
+                    <input type="text" id="othertotalcost" disabled>万円
+                </td>
+            </tr>
+            <tr>
+                <td>金融機関名</td>
+                <td>
+                    <input type="text" id="financailinstitute">
+                </td>
+            </tr>
+            <tr>
+                <td>支店名</td>
+                <td>
+                    <input type="text" id="branchname">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <div class="tijiao">
+        <button type="button" class="button" id="previous">戻る</button>
+        <button type="button" class="button" id="save">保存</button>
+        <button type="button" class="button" id="next">次へ</button>
+    </div>
+    <input type="text" id="userid">
+    <script>
+        <!--获取对象-->
+        let dbhisaijutakushuruiinput = document.getElementById('housetype');
+        let dbhisaijutakushoyuuinput = document.getElementById('housebelongsto');
+        let dbhigaijokyoinput = document.getElementById('damagesituation');
+
+        let dbbukkenmensekiinput = document.getElementById('landarea');
+        let aplbukkenaddresstodofukeninput = document.getElementById('addresstodofuken');
+        let dbbukkenaddressshiguninput = document.getElementById('addressshigun');
+        let dbbukkenaddresschosoninput = document.getElementById('addresschoson');
+        let aplbukkenaddressbanchiinput = document.getElementById('addressbanchi');
+        let aplbukkenaddresspostcode3input = document.getElementById('addresspostcode');
+        let dbbukkenshikichinoshoyukankeiinput = document.getElementById('landbelongsto');
+        let dbbukkentatemonojutakuinput = document.getElementById('tatemono_jutaku');
+        let dbbukkentatemonohijutakuinput = document.getElementById('tatemono_hijutaku');
+        let dbbukkenkozoinput = document.getElementById('buildamterial');
+        let dbbukkentatekatakodatekeishikiinput = document.getElementById('buildtype');
+        let dbnyukyoyoteidateyearinput = document.getElementById('nyukyoyoteidateyear');
+        let dbnyukyoyoteidatemonthinput = document.getElementById('nyukyoyoteidatemonth');
+        let dbjutakuyotoinput = document.getElementById('housepurpose');
+        let dbbukkenkojikanryodateyearinput = document.getElementById('kojikanryodate_year');
+        let dbbukkenkojikanryodatemonthinput = document.getElementById('kojikanryodate_Month');
+
+        let dbshikindatetochishikinyearinput = document.getElementById('shikindatetochishikinyear');
+        let dbshikindatetochishikinmonthinput = document.getElementById('shikindatetochishikinmonth');
+        let dbshikindatechukanshikinyearinput = document.getElementById('shikindatechukanshikinyear');
+        let dbshikindatechukanshikinmonthinput = document.getElementById('shikindatechukanshikinmonth');
+        let dbshikindatesaishushikinyearinput = document.getElementById('shikindatesaishushikinyear');
+        let dbshikindatesaishushikinmonthinput = document.getElementById('shikindatesaishushikinmonth');
+
+        let dbkariireininkaishanameinput = document.getElementById('enterprisename');
+        let dbchukaihanbainamekanainput = document.getElementById('agencynamekana');
+
+        let dbchukaihanbaitantoshanamemeiinput = document.getElementById('maninchargemei');
+        let dbchukaihanbaitantoshanameseiinput = document.getElementById('maninchargesei');
+
+        let dbhiyoukensetsuhiinput = document.getElementById('constructioncost');
+        let dbhiyoutochisyotokuhiinput = document.getElementById('landcost');
+        let dbhiyoutotalinput = document.getElementById('totalcost');
+
+        let dbkariiregakukingakuinput = document.getElementById('loanamount');
+        let dbkariiregakukinriinput = document.getElementById('landinterest');
+        let dbkariiregakuhensaikikaninput = document.getElementById('borrowperiod');
+        let dbkariiregakunenhensai12no1input = document.getElementById('borrowhope');
+        let dbhensaihouhouinput = document.getElementById('borrowtype');
+        let dbhisaishinzokudokyoariinput = document.getElementById('whetherhasrelative');
+        let dbsueokikikannonensuinput = document.getElementById('installyears');
+
+        let dbsonotanameinput = document.getElementById('otherloanname');
+        let dbsonotakingakuinput = document.getElementById('otherloanamount');
+        let dbsonotahensaikikaninput = document.getElementById('otherloanperiod');
+        let dbsonotanenhensai12no1input = document.getElementById('dbsonotanenhensai12no1');
+        let dbhiyousonotatotalinput = document.getElementById('otherconstructioncost');
+        let dbsogokingakuinput = document.getElementById('othertotalcost');
+        let dbkinyukikannameinput = document.getElementById('financailinstitute');
+        let dbshitemnameinput = document.getElementById('branchname');
+
+        let previousbutton = document.getElementById("previous");
+        let savebutton = document.getElementById("save");
+        let nextbutton = document.getElementById("next");
+
+        let useridInput = document.getElementById("userid");
+
+        let applierinfo = document.getElementById("applierinfo");
+        applierinfo.innerHTML = "個人申請者 "+sessionStorage.getItem("applierxing").replace(/"/g,"")+sessionStorage.getItem("applierming").replace(/"/g,"");
+        let guaranteeinfo = document.getElementById("guaranteeinfo");
+        guaranteeinfo.innerHTML = "担保者"+sessionStorage.getItem("guaranteexing").replace(/"/g,"")+sessionStorage.getItem("guaranteeming").replace(/"/g,"");
+
+        //获取申请人id
+        let appliersei = sessionStorage.getItem("applierxing").replace(/"/g,"");
+        let appliermei = sessionStorage.getItem("applierming").replace(/"/g,"");
+        let user1;
+        fetch('/users/queryapplier',{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({xing:appliersei,ming:appliermei})
+        })
+            .then(response =>{
+                if (response.ok){
+                    return response.text();
+                }
+                else {
+                    return response.text().then(text =>{
+                        throw new Error(text)
+                    })
+                }
+            })
+            .then(data=>{
+                if (data.length>2){
+                    user1 = JSON.parse(data);
+                    useridInput.value = user1[0].id;
+                    alert('個人情報'+user1[0].id+' 姓名：'+user1[0].xing+user1[0].ming+' 国籍：'+user1[0].country+' 性别：'+user1[0].sex+' 生日：'+user1[0].birth+
+                        ' 电话：'+user1[0].tel+' 手机：'+user1[0].phone+' 工作：'+user1[0].job+' 公司地址：'+user1[0].address);
+                }else{
+                    alert('Applier not found')
+                    return;
+                }
+            })
+            .catch(error => {
+                alert(error.message);
+            })
+
+        savebutton.addEventListener('click',() =>{
+            //输入检查
+            let check1 = /^\d{1,5}$/g;
+            if (check1.test(dbbukkenmensekiinput.value)===false){
+                alert('Input right dbbukkenmenseki');
+                return;
+            }
+            let check2 = /^\d{1,3}\.\d{0,2}$/g;
+            if (check2.test(dbbukkentatemonojutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonojutakuinput.value)===false){
+                alert('Input right dbbukkentatemonojutaku');
+                return;
+            }
+            let check3 = /^\d{1,3}\.\d{0,2}$/g;
+            if (check3.test(dbbukkentatemonohijutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonohijutakuinput.value)===false){
+                alert('Input right dbbukkentatemonohijutaku');
+                return;
+            }
+            let check4 = /^\d{1,15}$/g;
+            if (check4.test(aplbukkenaddresspostcode3input.value)===false){
+                alert('Input right postcode');
+                return;
+            }
+            let check5 = /^\d{1,5}$/g;
+            if (check5.test(dbhiyoukensetsuhiinput.value)===false){
+                alert('Input right dbhiyoukensetsuhi');
+                return;
+            }
+            let check6 = /^\d{1,5}$/g;
+            if (check6.test(dbhiyoutochisyotokuhiinput.value)===false){
+                alert('Input right dbhiyoutochisyotokuhi');
+                return;
+            }
+            let check7 = /^\d{1,6}$/g;
+            if (check7.test(dbhiyoutotalinput.value)===false){
+                alert('Input right dbhiyoutotal');
+                return;
+            }
+            let check8 = /^\d{1,5}$/g;
+            if (check8.test(dbkariiregakukingakuinput.value)===false){
+                alert('Input right dbkariiregakukingaku');
+                return;
+            }
+            let check9 = /^\d\.\d{0,2}$/g;
+            if (check9.test(dbkariiregakukinriinput.value)===false){
+                alert('Input right dbkariiregakukinri');
+                return;
+            }
+            let check10 = /^\d{1,2}$/g;
+            if (check10.test(dbkariiregakuhensaikikaninput.value)===false){
+                alert('Input right dbkariiregakuhensaikikan');
+                return;
+            }
+            let check11 = /^\d{1,9}$/g;
+            if (check11.test(dbkariiregakunenhensai12no1input.value)===false){
+
+            }
+            //その他の借入内容入力したら、その他の借入内容は必須になる。
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ){
+                let check12 = /^\d{1,5}$/g;
+                if (check12.test(dbsonotakingakuinput.value)===false){
+                    alert('Input right dbsonotakingaku');
+                    return;
+                }
+                let check13 = /^\d{1,2}$/g;
+                if (check13.test(dbsonotahensaikikaninput.value)===false){
+                    alert('Input right dbsonotahensaikikan');
+                    return;
+                }
+                let check14 = /^\d{1,9}$/g;
+                if (check14.test(dbsonotanenhensai12no1input.value)===false){
+
+                }
+                let check15 = /^\d{1,6}$/g;
+                if (check15.test(dbhiyousonotatotalinput.value)===false){
+                    alert('Input right dbhiyousonotatotal');
+                    return;
+                }
+                let check16 = /^\d{1,6}$/g;
+                if (check16.test(dbsogokingakuinput.value)===false){
+                    alert('Input right dbsogokingaku');
+                    return;
+                }
+                if (dbsonotanameinput.value===''){
+                    alert('Input right sonotaname');
+                    return;
+                }
+                if (dbkinyukikannameinput.value===''){
+                    alert('Input right kinyukikanname');
+                    return;
+                }
+                if (dbshitemnameinput.value===''){
+                    alert('Input right shitemname');
+                    return;
+                }
+            }
+
+
+            if (dbkariireininkaishanameinput.value===''){
+                alert('Input right kaishaname');
+                return;
+            }
+            if (dbchukaihanbaitantoshanameseiinput.value===''){
+                alert('Input right sei');
+                return;
+            }
+            if (dbchukaihanbaitantoshanamemeiinput.value===''){
+                alert('Input right mei');
+                return;
+            }
+            //土地先行資金の受取予定年月は、「中間資金の受取予定年月」「最終資金の受取予定年月」より後の年月を指定できません。
+            //中間資金の受取予定年月は、「最終資金の受取予定年月」より後の年月を指定できません。
+            let dbshikindatetochishiki = dbshikindatetochishikinyearinput.options[dbshikindatetochishikinyearinput.selectedIndex].value + dbshikindatetochishikinmonthinput.options[dbshikindatetochishikinmonthinput.selectedIndex].value;
+            let dbshikindatechukanshikin = dbshikindatechukanshikinyearinput.options[dbshikindatechukanshikinyearinput.selectedIndex].value + dbshikindatechukanshikinmonthinput.options[dbshikindatechukanshikinmonthinput.selectedIndex].value;
+            let dbshikindatesaishushikin = dbshikindatesaishushikinyearinput.options[dbshikindatesaishushikinyearinput.selectedIndex].value + dbshikindatesaishushikinmonthinput.options[dbshikindatesaishushikinmonthinput.selectedIndex].value;
+            if (dbshikindatetochishiki > dbshikindatechukanshikin){
+                alert(dbshikindatetochishiki + ' is later than ' + dbshikindatechukanshikin);
+                return;
+            }
+            if (dbshikindatetochishiki > dbshikindatesaishushikin){
+                alert(dbshikindatetochishiki + ' is later than ' + dbshikindatesaishushikin);
+                return;
+            }
+            if (dbshikindatechukanshikin > dbshikindatesaishushikin){
+                alert(dbshikindatechukanshikin + ' is later than ' + dbshikindatesaishushikin);
+                return;
+            }
+            //选择不能为空
+            if (dbhisaijutakushuruiinput.options[dbhisaijutakushuruiinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbhisaijutakushoyuuinput.options[dbhisaijutakushoyuuinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbhigaijokyoinput.options[dbhigaijokyoinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (aplbukkenaddresstodofukeninput.options[aplbukkenaddresstodofukeninput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbbukkenkozoinput.options[dbbukkenkozoinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbbukkentatekatakodatekeishikiinput.options[dbbukkentatekatakodatekeishikiinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbnyukyoyoteidateyearinput.options[dbnyukyoyoteidateyearinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbnyukyoyoteidatemonthinput.options[dbnyukyoyoteidatemonthinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbjutakuyotoinput.options[dbjutakuyotoinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbbukkenkojikanryodateyearinput.options[dbbukkenkojikanryodateyearinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbbukkenkojikanryodatemonthinput.options[dbbukkenkojikanryodatemonthinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbshikindatetochishikinyearinput.options[dbshikindatetochishikinyearinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbshikindatetochishikinmonthinput.options[dbshikindatetochishikinmonthinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbshikindatechukanshikinyearinput.options[dbshikindatechukanshikinyearinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbshikindatechukanshikinmonthinput.options[dbshikindatechukanshikinmonthinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbshikindatesaishushikinyearinput.options[dbshikindatesaishushikinyearinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbshikindatesaishushikinmonthinput.options[dbshikindatesaishushikinmonthinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbhisaishinzokudokyoariinput.options[dbhisaishinzokudokyoariinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            if (dbsueokikikannonensuinput.options[dbsueokikikannonensuinput.selectedIndex].value===''){
+                alert('選択してください');
+                return;
+            }
+            //建設に要する費用（再掲）と災害融資の借入希望額、その他の借入内容欄　は同じで保存される。
+            if (dbsogokingakuinput.value !== dbhiyousonotatotalinput.value){
+                alert('建設に要する費用 != 災害融資の借入希望額、その他の借入内容');
+                return;
+            }
+
+            //データを（被災住宅金融支援申請（Building）オブジェクトに保存する
+
+            let dbhisaijutakushurui = dbhisaijutakushuruiinput.value.trim();
+            let dbhisaijutakushoyuu = dbhisaijutakushoyuuinput.value.trim();
+            let dbhigaijokyo = dbhigaijokyoinput.value.trim();
+            let dbhigaijokyodaikibohankaiorhankai = document.getElementById('whetherhasdifficulty').checked;
+
+            let dbbukkenmenseki = dbbukkenmensekiinput.value.trim();
+            let aplbukkenaddresstodofuken = aplbukkenaddresstodofukeninput.value.trim();
+            let dbbukkenaddressshigun = dbbukkenaddressshiguninput.value.trim();
+            let dbbukkenaddresschoson = dbbukkenaddresschosoninput.value.trim();
+            let aplbukkenaddressbanchi = aplbukkenaddressbanchiinput.value.trim();
+            let aplbukkenaddresspostcode3 = aplbukkenaddresspostcode3input.value.trim();
+            let dbbousaisyudanitenjigyo = document.getElementById('needtorebuild').checked;
+            let dbbukkenshikichinoshoyukankei = dbbukkenshikichinoshoyukankeiinput.value.trim();
+            let dbbukkentatemonojutaku = dbbukkentatemonojutakuinput.value.trim();
+            let dbbukkentatemonohijutaku = dbbukkentatemonohijutakuinput.value.trim();
+            let dbbukkenkozo = dbbukkenkozoinput.value.trim();
+            let dbbukkentatekatakodatekeishiki = dbbukkentatekatakodatekeishikiinput.value.trim();
+            let dbnyukyoyoteidateyear = dbnyukyoyoteidateyearinput.value.trim();
+            let dbnyukyoyoteidatemonth = dbnyukyoyoteidatemonthinput.value.trim();
+            let dbjutakuyoto = dbjutakuyotoinput.value.trim();
+            let dbbukkenkojikanryodateyear = dbbukkenkojikanryodateyearinput.value.trim();
+            let dbbukkenkojikanryodatemonth = dbbukkenkojikanryodatemonthinput.value.trim();
+
+            let dbshikindatetochishikinyear = dbshikindatetochishikinyearinput.value.trim();
+            let dbshikindatetochishikinmonth = dbshikindatetochishikinmonthinput.value.trim();
+            let dbshikindatechukanshikinyear = dbshikindatechukanshikinyearinput.value.trim();
+            let dbshikindatechukanshikinmonth = dbshikindatechukanshikinmonthinput.value.trim();
+            let dbshikindatesaishushikinyear = dbshikindatesaishushikinyearinput.value.trim();
+            let dbshikindatesaishushikinmonth = dbshikindatesaishushikinmonthinput.value.trim();
+
+            let dbkariireininkaishaname = dbkariireininkaishanameinput.value.trim();
+            let dbchukaihanbainamekana = dbchukaihanbainamekanainput.value.trim();
+
+            let dbchukaihanbaitantoshanamemei = dbchukaihanbaitantoshanamemeiinput.value.trim();
+            let dbchukaihanbaitantoshanamesei = dbchukaihanbaitantoshanameseiinput.value.trim();
+
+            let dbhiyoukensetsuhi = dbhiyoukensetsuhiinput.value.trim();
+            let dbhiyoutochisyotokuhi = dbhiyoutochisyotokuhiinput.value.trim();
+            let dbhiyoutotal = dbhiyoutotalinput.value.trim();
+
+            let dbkariiregakukingaku = dbkariiregakukingakuinput.value.trim();
+            let dbkariiregakukinri = dbkariiregakukinriinput.value.trim();
+            let dbkariiregakuhensaikikan = dbkariiregakuhensaikikaninput.value.trim();
+            let dbkariiregakunenhensai12no1 = dbkariiregakunenhensai12no1input.value.trim();
+            let dbhensaihouhou = dbhensaihouhouinput.value.trim();
+            let dbhisaishinzokudokyoari = dbhisaishinzokudokyoariinput.value.trim();
+            let dbsueokikikannonensu = dbsueokikikannonensuinput.value.trim();
+
+            let dbsonotaname = dbsonotanameinput.value.trim();
+            let dbsonotakingaku = dbsonotakingakuinput.value.trim();
+            let dbsonotahensaikikan = dbsonotahensaikikaninput.value.trim();
+            let dbsonotanenhensai12no1 = dbsonotanenhensai12no1input.value.trim();
+            let dbhiyousonotatotal = dbhiyousonotatotalinput.value.trim();
+            let dbsogokingaku = dbsogokingakuinput.value.trim();
+            let dbkinyukikanname = dbkinyukikannameinput.value.trim();
+            let dbshitemname = dbshitemnameinput.value.trim();
+
+            let userid = useridInput.value.trim();
+
+            fetch('/users/addbuilding', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                //将数据转换成json形式传送
+                //データをjson形式で伝送
+                body: JSON.stringify({
+                    dbhisaijutakushurui,
+                    dbhisaijutakushoyuu,
+                    dbhigaijokyo,
+                    dbhigaijokyodaikibohankaiorhankai,
+                    dbbukkenmenseki,
+                    aplbukkenaddresstodofuken,
+                    dbbukkenaddressshigun,
+                    dbbukkenaddresschoson,
+                    aplbukkenaddressbanchi,
+                    aplbukkenaddresspostcode3,
+                    dbbousaisyudanitenjigyo,
+                    dbbukkenshikichinoshoyukankei,
+                    dbbukkentatemonojutaku,
+                    dbbukkentatemonohijutaku,
+                    dbbukkenkozo,
+                    dbbukkentatekatakodatekeishiki,
+                    dbnyukyoyoteidateyear,
+                    dbnyukyoyoteidatemonth,
+                    dbjutakuyoto,
+                    dbbukkenkojikanryodateyear,
+                    dbbukkenkojikanryodatemonth,
+                    dbshikindatetochishikinyear,
+                    dbshikindatetochishikinmonth,
+                    dbshikindatechukanshikinyear,
+                    dbshikindatechukanshikinmonth,
+                    dbshikindatesaishushikinyear,
+                    dbshikindatesaishushikinmonth,
+                    dbkariireininkaishaname,
+                    dbchukaihanbainamekana,
+                    dbchukaihanbaitantoshanamemei,
+                    dbchukaihanbaitantoshanamesei,
+                    dbhiyoukensetsuhi,
+                    dbhiyoutochisyotokuhi,
+                    dbhiyoutotal,
+                    dbkariiregakukingaku,
+                    dbkariiregakukinri,
+                    dbkariiregakuhensaikikan,
+                    dbkariiregakunenhensai12no1,
+                    dbhensaihouhou,
+                    dbhisaishinzokudokyoari,
+                    dbsueokikikannonensu,
+                    dbsonotaname,
+                    dbsonotakingaku,
+                    dbsonotahensaikikan,
+                    dbsonotanenhensai12no1,
+                    dbhiyousonotatotal,
+                    dbsogokingaku,
+                    dbkinyukikanname,
+                    dbshitemname,
+                    userid
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('保存成功');
+
+
+                    } else {
+                        return response.text().then(text => {
+                            throw new Error(text)
+                        });
+                    }
+                })
+                // 如果存在有问题的输入, 就alert提示错误
+                // 入力に異常がある場合、エラーで警告する
+                .catch(error => {
+                    alert(error.message);
+                })
+        })
+
+        dbbukkenmensekiinput.onblur = function (){
+            let check1 = /^\d{1,5}$/g;
+            if (check1.test(dbbukkenmensekiinput.value)===false){
+                alert('Input right dbbukkenmenseki');
+            }
+        }
+        dbbukkentatemonojutakuinput.onblur = function (){
+            let check2 = /^\d{1,3}\.\d{0,2}$/g;
+            let pointindex = dbbukkentatemonojutakuinput.value.indexOf("\.");
+            if (check2.test(dbbukkentatemonojutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonojutakuinput.value)===false){
+                alert('Input right dbbukkentatemonojutaku');
+                dbbukkentatemonojutakuinput.value = dbbukkentatemonojutakuinput.value.substring(0,pointindex+3);
+            }
+        }
+        dbbukkentatemonohijutakuinput.onblur = function (){
+            let check3 = /^\d{1,3}\.\d{0,2}$/g;
+            let pointindex = dbbukkentatemonohijutakuinput.value.indexOf("\.");
+            if (check3.test(dbbukkentatemonohijutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonohijutakuinput.value)===false){
+                alert('Input right dbbukkentatemonohijutaku');
+                dbbukkentatemonohijutakuinput.value = dbbukkentatemonohijutakuinput.value.substring(0,pointindex+3);
+            }
+        }
+        aplbukkenaddresspostcode3input.onblur = function (){
+            let check4 = /^\d{1,15}$/g;
+            if (check4.test(aplbukkenaddresspostcode3input.value)===false){
+                alert('Input right postcode');
+            }
+        }
+        dbhiyoukensetsuhiinput.onblur = function (){
+            let check5 = /^\d{1,5}$/g;
+            if (check5.test(dbhiyoukensetsuhiinput.value)===false){
+                alert('Input right dbhiyoukensetsuhi');
+            }
+        }
+        dbhiyoutochisyotokuhiinput.onblur = function (){
+            let check6 = /^\d{1,5}$/g;
+            if (check6.test(dbhiyoutochisyotokuhiinput.value)===false){
+                alert('Input right dbhiyoutochisyotokuhi');
+            }
+        }
+        dbhiyoutotalinput.onblur = function (){
+            let check7 = /^\d{1,6}$/g;
+            if (check7.test(dbhiyoutotalinput.value)===false){
+                alert('Input right dbhiyoutotal');
+            }
+        }
+        dbkariiregakukingakuinput.onblur = function (){
+            let check8 = /^\d{1,5}$/g;
+            if (check8.test(dbkariiregakukingakuinput.value)===false){
+                alert('Input right dbkariiregakukingaku');
+            }
+        }
+        dbkariiregakukinriinput.onblur = function (){
+            let check9 = /^\d\.\d{0,2}$/g;
+            let pointindex = dbkariiregakukinriinput.value.indexOf("\.");
+            if (/^\d$/g.test(dbkariiregakukinriinput.value)){
+                dbkariiregakukinriinput.value = dbkariiregakukinriinput.value + '.00';
+            }
+            if (/^\d\.\d$/g.test(dbkariiregakukinriinput.value)){
+                dbkariiregakukinriinput.value = dbkariiregakukinriinput.value + '0';
+            }
+            if (check9.test(dbkariiregakukinriinput.value)===false){
+                dbkariiregakukinriinput.value = dbkariiregakukinriinput.value.substring(0,pointindex+3);
+            }
+            if (parseFloat(dbkariiregakukinriinput.value) >= 10.0){
+                alert('Dbkariiregakukinri should < 10.00%');
+            }
+            //年間返済額の1/12計算　　元金均等返済の場合 （1000000 * 金利 / 12 / 100  ）+ 1000000/（返済期間*12）
+            //年間返済額の1/12計算　元利均等返済の場合 （1000000 * 金利 / 12 / 100  ）* pow （1+（金利 /12 /100），返済期間*12 ）
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='01 元利均等返済'){
+                dbkariiregakunenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) * Math.pow((1 + (parseFloat(dbkariiregakukinriinput.value) / 12 / 100)),parseInt(dbkariiregakuhensaikikaninput.value) * 12)).toString();
+                dbsonotanenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) * Math.pow((1 + (parseFloat(dbkariiregakukinriinput.value) / 12 / 100)),parseInt(dbsonotahensaikikaninput.value) * 12)).toString();
+            }
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='02 元金均等返済'){
+                dbkariiregakunenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) + 1000000 / (parseFloat(dbkariiregakuhensaikikaninput.value) * 12)).toString();
+                dbsonotanenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) + 1000000 / (parseFloat(dbsonotahensaikikaninput.value) * 12)).toString();
+            }
+            if (dbkariiregakukinriinput.value==='' || dbsonotahensaikikaninput.value==='' || dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value===''){
+                dbsonotanenhensai12no1input.value = '';
+            }
+            if (dbkariiregakukinriinput.value==='' || dbkariiregakuhensaikikaninput.value==='' || dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value===''){
+                dbkariiregakunenhensai12no1input.value = '';
+            }
+        }
+        dbkariiregakuhensaikikaninput.onblur = function () {
+            let check10 = /^\d{1,2}$/g;
+            if (check10.test(dbkariiregakuhensaikikaninput.value) === false) {
+                alert('Input right dbkariiregakuhensaikikan');
+            }
+        }
+        dbkariiregakuhensaikikaninput.oninput = function (){
+            //年間返済額の1/12計算　　元金均等返済の場合 （1000000 * 金利 / 12 / 100  ）+ 1000000/（返済期間*12）
+            //年間返済額の1/12計算　元利均等返済の場合 （1000000 * 金利 / 12 / 100  ）* pow （1+（金利 /12 /100），返済期間*12 ）
+            if (dbkariiregakukinriinput.value==='' || dbkariiregakuhensaikikaninput.value==='' || dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value===''){
+                dbkariiregakunenhensai12no1input.value = '';
+            }
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='01 元利均等返済'){
+                dbkariiregakunenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) * Math.pow((1 + (parseFloat(dbkariiregakukinriinput.value) / 12 / 100)),parseInt(dbkariiregakuhensaikikaninput.value) * 12)).toString();
+            }
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='02 元金均等返済'){
+                dbkariiregakunenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) + 1000000 / (parseFloat(dbkariiregakuhensaikikaninput.value) * 12)).toString();
+            }
+        }
+        dbsonotahensaikikaninput.oninput = function (){
+            //年間返済額の1/12計算　　元金均等返済の場合 （1000000 * 金利 / 12 / 100  ）+ 1000000/（返済期間*12）
+            //年間返済額の1/12計算　元利均等返済の場合 （1000000 * 金利 / 12 / 100  ）* pow （1+（金利 /12 /100），返済期間*12 ）
+            if (dbkariiregakukinriinput.value==='' || dbsonotahensaikikaninput.value==='' || dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value===''){
+                dbsonotanenhensai12no1input.value = '';
+            }
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='01 元利均等返済'){
+                dbsonotanenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) * Math.pow((1 + (parseFloat(dbkariiregakukinriinput.value) / 12 / 100)),parseInt(dbsonotahensaikikaninput.value) * 12)).toString();
+            }
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='02 元金均等返済'){
+                dbsonotanenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) + 1000000 / (parseFloat(dbsonotahensaikikaninput.value) * 12)).toString();
+            }
+        }
+        dbkariiregakunenhensai12no1input.onblur = function (){
+            let check11 = /^\d{1,9}$/g;
+            if (check11.test(dbkariiregakunenhensai12no1input.value)===false){
+                alert('Input right dbkariiregakunenhensai12no1');
+            }
+        }
+        dbsonotakingakuinput.onblur = function (){
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
+                let check12 = /^\d{1,5}$/g;
+                if (check12.test(dbsonotakingakuinput.value) === false) {
+                    alert('Input right dbsonotakingaku');
+                }
+            }
+        }
+        dbsonotahensaikikaninput.onblur = function (){
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
+                let check13 = /^\d{1,2}$/g;
+                if (check13.test(dbsonotahensaikikaninput.value) === false) {
+                    alert('Input right dbsonotahensaikikan');
+                }
+            }
+        }
+        dbsonotanenhensai12no1input.onblur = function (){
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
+                let check14 = /^\d{1,9}$/g;
+                if (check14.test(dbsonotanenhensai12no1input.value) === false) {
+                    alert('Input right dbsonotanenhensai12no1');
+                }
+            }
+        }
+        dbhiyousonotatotalinput.onblur = function (){
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
+                let check15 = /^\d{1,6}$/g;
+                if (check15.test(dbhiyousonotatotalinput.value) === false) {
+                    alert('Input right dbhiyousonotatotal');
+                }
+            }
+        }
+        dbsogokingakuinput.onblur = function (){
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
+                let check16 = /^\d{1,6}$/g;
+                if (check16.test(dbsogokingakuinput.value) === false) {
+                    alert('Input right dbsogokingaku');
+                }
+            }
+        }
+        //被災住宅の種類（マイホーム）を選択したら、被災住宅の所有等欄（申込本人が所有している、上記以外）を表示される。
+        let showoption1 = document.getElementById('show1');
+        let showoption2 = document.getElementById('show2');
+        showoption1.style.display="none";
+        showoption2.style.display="none";
+        dbhisaijutakushuruiinput.onblur = function (){
+            if (dbhisaijutakushuruiinput.options[dbhisaijutakushuruiinput.selectedIndex].value==='マイホーム'){
+                showoption1.style.display = "inline";
+                showoption2.style.display = "inline";
+            }else {
+                showoption1.style.display="none";
+                showoption2.style.display="none";
+            }
+        }
+        //被災住宅の修理が不能又は困難である欄は　(被害状況）が（01 全壊）の場合は、選択不要です。
+        dbhigaijokyoinput.onchange = function (){
+            let dbhigaijokyodaikibohankaiorhankaiinput = document.getElementById('whetherhasdifficulty');
+            if (dbhigaijokyoinput.value==='01全壊'){
+                dbhigaijokyodaikibohankaiorhankaiinput.checked = false;
+                dbhigaijokyodaikibohankaiorhankaiinput.disabled = true;
+            }else {
+                dbhigaijokyodaikibohankaiorhankaiinput.disabled = false;
+            }
+        }
+        //名称（カタカナ）は全角を半角に自動変換できる
+        function zenkana2Hankana(str) {
+            let kanaMap = {
+                "ガ": "ｶﾞ", "ギ": "ｷﾞ", "グ": "ｸﾞ", "ゲ": "ｹﾞ", "ゴ": "ｺﾞ",
+                "ザ": "ｻﾞ", "ジ": "ｼﾞ", "ズ": "ｽﾞ", "ゼ": "ｾﾞ", "ゾ": "ｿﾞ",
+                "ダ": "ﾀﾞ", "ヂ": "ﾁﾞ", "ヅ": "ﾂﾞ", "デ": "ﾃﾞ", "ド": "ﾄﾞ",
+                "バ": "ﾊﾞ", "ビ": "ﾋﾞ", "ブ": "ﾌﾞ", "ベ": "ﾍﾞ", "ボ": "ﾎﾞ",
+                "パ": "ﾊﾟ", "ピ": "ﾋﾟ", "プ": "ﾌﾟ", "ペ": "ﾍﾟ", "ポ": "ﾎﾟ",
+                "ヴ": "ｳﾞ", "ヷ": "ﾜﾞ", "ヺ": "ｦﾞ",
+                "ア": "ｱ", "イ": "ｲ", "ウ": "ｳ", "エ": "ｴ", "オ": "ｵ",
+                "カ": "ｶ", "キ": "ｷ", "ク": "ｸ", "ケ": "ｹ", "コ": "ｺ",
+                "サ": "ｻ", "シ": "ｼ", "ス": "ｽ", "セ": "ｾ", "ソ": "ｿ",
+                "タ": "ﾀ", "チ": "ﾁ", "ツ": "ﾂ", "テ": "ﾃ", "ト": "ﾄ",
+                "ナ": "ﾅ", "ニ": "ﾆ", "ヌ": "ﾇ", "ネ": "ﾈ", "ノ": "ﾉ",
+                "ハ": "ﾊ", "ヒ": "ﾋ", "フ": "ﾌ", "ヘ": "ﾍ", "ホ": "ﾎ",
+                "マ": "ﾏ", "ミ": "ﾐ", "ム": "ﾑ", "メ": "ﾒ", "モ": "ﾓ",
+                "ヤ": "ﾔ", "ユ": "ﾕ", "ヨ": "ﾖ",
+                "ラ": "ﾗ", "リ": "ﾘ", "ル": "ﾙ", "レ": "ﾚ", "ロ": "ﾛ",
+                "ワ": "ﾜ", "ヲ": "ｦ", "ン": "ﾝ",
+                "ァ": "ｧ", "ィ": "ｨ", "ゥ": "ｩ", "ェ": "ｪ", "ォ": "ｫ",
+                "ッ": "ｯ", "ャ": "ｬ", "ュ": "ｭ", "ョ": "ｮ",
+                "。": "｡", "、": "､", "ー": "ｰ", "「": "｢", "」": "｣", "・": "･"
+            }
+            let reg = new RegExp('(' + Object.keys(kanaMap).join('|') + ')' , 'g' );
+            return str
+                .replace(reg, function (match){
+                    return kanaMap[match];
+                })
+                .replace(/゛/g, 'ﾞ')
+                .replace(/゜/g, 'ﾟ');
+        }
+        dbchukaihanbainamekanainput.oninput = function (){
+            dbchukaihanbainamekanainput.value = zenkana2Hankana(dbchukaihanbainamekanainput.value);
+        }
+        //①建設費＋②土地取得費　＝　合計（自動計算）（建設に要する費用）
+        //建設に要する費用欄は合計欄のデータを自動的に取得する。
+        dbhiyoukensetsuhiinput.oninput = function (){
+            if (dbhiyoukensetsuhiinput.value === '' && dbhiyoutochisyotokuhiinput.value === ''){
+                dbhiyoutotalinput.value = '';
+            }
+            if (dbhiyoukensetsuhiinput.value === '' && dbhiyoutochisyotokuhiinput.value !== ''){
+                dbhiyoutotalinput.value = dbhiyoutochisyotokuhiinput.value;
+            }
+            if (dbhiyoukensetsuhiinput.value !== '' && dbhiyoutochisyotokuhiinput.value === ''){
+                dbhiyoutotalinput.value = dbhiyoukensetsuhiinput.value;
+            }
+            if (dbhiyoukensetsuhiinput.value !== '' && dbhiyoutochisyotokuhiinput.value !== ''){
+                dbhiyoutotalinput.value = (parseInt(dbhiyoukensetsuhiinput.value) + parseInt(dbhiyoutochisyotokuhiinput.value)).toString();
+            }
+            dbhiyousonotatotalinput.value = dbhiyoutotalinput.value;
+        }
+        dbhiyoutochisyotokuhiinput.oninput = function (){
+            if (dbhiyoukensetsuhiinput.value === '' && dbhiyoutochisyotokuhiinput.value === ''){
+                dbhiyoutotalinput.value = '';
+            }
+            if (dbhiyoukensetsuhiinput.value === '' && dbhiyoutochisyotokuhiinput.value !== ''){
+                dbhiyoutotalinput.value = dbhiyoutochisyotokuhiinput.value;
+            }
+            if (dbhiyoukensetsuhiinput.value !== '' && dbhiyoutochisyotokuhiinput.value === ''){
+                dbhiyoutotalinput.value = dbhiyoukensetsuhiinput.value;
+            }
+            if (dbhiyoukensetsuhiinput.value !== '' && dbhiyoutochisyotokuhiinput.value !== ''){
+                dbhiyoutotalinput.value = (parseInt(dbhiyoukensetsuhiinput.value) + parseInt(dbhiyoutochisyotokuhiinput.value)).toString();
+            }
+            dbhiyousonotatotalinput.value = dbhiyoutotalinput.value;
+        }
+        //⑤災害融資の借入希望額、その他の借入内容欄　＝③その他の借入内容借入金額＋④借入希望額_借入金額
+        //災害融資の借入希望額、その他の借入内容欄は入力できない
+        dbkariiregakukingakuinput.oninput = function (){
+            if (dbkariiregakukingakuinput.value === '' && dbsonotakingakuinput.value === ''){
+                dbsogokingakuinput.value = '';
+            }
+            if (dbkariiregakukingakuinput.value === '' && dbsonotakingakuinput.value !== ''){
+                dbsogokingakuinput.value = dbsonotakingakuinput.value;
+            }
+            if (dbkariiregakukingakuinput.value !== '' && dbsonotakingakuinput.value === ''){
+                dbsogokingakuinput.value = dbkariiregakukingakuinput.value;
+            }
+            if (dbkariiregakukingakuinput.value !== '' && dbsonotakingakuinput.value !== ''){
+                dbsogokingakuinput.value = (parseInt(dbkariiregakukingakuinput.value) + parseInt(dbsonotakingakuinput.value)).toString();
+            }
+        }
+        dbsonotakingakuinput.oninput = function (){
+            if (dbkariiregakukingakuinput.value === '' && dbsonotakingakuinput.value === ''){
+                dbsogokingakuinput.value = '';
+            }
+            if (dbkariiregakukingakuinput.value === '' && dbsonotakingakuinput.value !== ''){
+                dbsogokingakuinput.value = dbsonotakingakuinput.value;
+            }
+            if (dbkariiregakukingakuinput.value !== '' && dbsonotakingakuinput.value === ''){
+                dbsogokingakuinput.value = dbkariiregakukingakuinput.value;
+            }
+            if (dbkariiregakukingakuinput.value !== '' && dbsonotakingakuinput.value !== ''){
+                dbsogokingakuinput.value = (parseInt(dbkariiregakukingakuinput.value) + parseInt(dbsonotakingakuinput.value)).toString();
+            }
+        }
+        //年間返済額の1/12計算　　元金均等返済の場合 （1000000 * 金利 / 12 / 100  ）+ 1000000/（返済期間*12）
+        //年間返済額の1/12計算　元利均等返済の場合 （1000000 * 金利 / 12 / 100  ）* pow （1+（金利 /12 /100），返済期間*12 ）
+        dbhensaihouhouinput.onchange = function (){
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='01 元利均等返済'){
+                dbkariiregakunenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) * Math.pow((1 + (parseFloat(dbkariiregakukinriinput.value) / 12 / 100)),parseInt(dbkariiregakuhensaikikaninput.value) * 12)).toString();
+                dbsonotanenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) * Math.pow((1 + (parseFloat(dbkariiregakukinriinput.value) / 12 / 100)),parseInt(dbsonotahensaikikaninput.value) * 12)).toString();
+            }
+            if (dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value==='02 元金均等返済'){
+                dbkariiregakunenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) + 1000000 / (parseFloat(dbkariiregakuhensaikikaninput.value) * 12)).toString();
+                dbsonotanenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) + 1000000 / (parseFloat(dbsonotahensaikikaninput.value) * 12)).toString();
+            }
+            if (dbkariiregakukinriinput.value==='' || dbsonotahensaikikaninput.value==='' || dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value===''){
+                dbsonotanenhensai12no1input.value = '';
+            }
+            if (dbkariiregakukinriinput.value==='' || dbkariiregakuhensaikikaninput.value==='' || dbhensaihouhouinput.options[dbhensaihouhouinput.selectedIndex].value===''){
+                dbkariiregakunenhensai12no1input.value = '';
+            }
+        }
+
+
+        //上一页按钮添加单击事件
+        previousbutton.addEventListener('click', () => {
+            window.location.href="task2.html"
+        });
+        //下一页按钮添加单击事件
+        nextbutton.addEventListener('click', () => {
+            window.location.href="task4.html"
+        });
+    </script>
+</body>
+</html>

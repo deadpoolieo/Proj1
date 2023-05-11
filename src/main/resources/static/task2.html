@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>担保者</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        h2 {
+            font-size: 22px;
+            text-align: center;
+            margin: 20px auto;
+        }
+        label{
+            display: inline-block;
+            width: 300px;
+            text-align: right;
+        }
+        .question{
+            display: inline;
+            text-align: center;
+        }
+        .check{
+            display: inline-block;
+            width: 180px;
+        }
+        .tijiao{
+            text-align: center;
+        }
+        .button{
+            width: 100px;
+            height: 30px;
+            line-height: 15px;
+            background: #2e82ff;
+            color: #ffffff;
+            font-size: 13px;
+            border-radius: 13px;
+            text-align: center;
+            border: none;
+        }
+        .applier{
+            width: 70px;
+        }
+        #userid{
+            display: none;
+        }
+        #task1info{
+            display: block;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <span id="task1info"></span>
+    <h2>担保者</h2>
+    <br>
+
+
+    <div class="question">
+        <label>氏名_名</label>
+        <input class="check" type="text" id="CpNameMei" placeholder="氏名_名">
+        <span id="tsnamemei"></span>
+    </div>
+    <div class="question">
+        <label>氏名_姓</label>
+        <input class="check" type="text" id="CpNameSei" placeholder="氏名_姓">
+        <span id="tsnamesei"></span>
+    </div>
+    <br>
+    <div class="question">
+        <label>生年月日</label>
+        <input class="check" type="date" id="CpBirthDateYear">
+        <span id="tsbirthdate"></span>
+    </div>
+    <div class="question">
+        <label>年齢</label>
+        <input class="check" type="text" id="CpBirthDate" disabled>
+    </div>
+    <br>
+    <div class="question">
+        <label>担保提供物</label>
+        <select class="check" id="CpTanpoMono">
+            <option value="">選択してください</option>
+            <option value="建物のみ">建物のみ</option>
+            <option value="土地のみ">土地のみ</option>
+            <option value="建物・土地">建物・土地</option>
+        </select>
+    </div>
+    <br>
+    <div class="question">
+        <label>担保者となる理由</label>
+        <select class="check" id="CpMoushikomi">
+            <option value="">選択してください</option>
+            <option value="親子リレー返済">親子リレー返済</option>
+            <option value="収入合算（同居親族）">収入合算（同居親族）</option>
+            <option value="収入合算（非同居直系親族）">収入合算（非同居直系親族）</option>
+            <option value="その他">その他</option>
+        </select>
+        <input type="text" id="ohtermoushikomi" placeholder="othermoushikomi">
+    </div>
+    <br>
+    <div class="question">
+        <label>申請者と関係</label>
+        <select class="check" id="CpRentaiSaimushaToOnaji">
+            <option value="">選択してください</option>
+            <option value="配偶者">配偶者</option>
+            <option value="婚約者">婚約者</option>
+            <option value="親">親</option>
+            <option value="子">子</option>
+            <option value="その他">その他</option>
+        </select>
+        <input type="text" id="ohterrelation" placeholder="otherrelation">
+    </div>
+    <br><br>
+    <div class="question">
+        <label>携帯電話</label>
+        <input class="check" type="text" placeholder="携帯電話" id="CpPhone">
+        <span id="tsphone"></span>
+    </div>
+    <br>
+    <div class="question">
+        <label>職業</label>
+        <select class="check" id="CpHonninShokugyoCode">
+            <option value="">選択してください</option>
+            <option value="自営業">自営業</option>
+            <option value="パート、アルバイト">パート、アルバイト</option>
+            <option value="公務員">公務員</option>
+            <option value="会社員">会社員</option>
+            <option value="その他">その他</option>
+            <option value="無職">無職</option>
+        </select>
+        <input type="text" id="ohterjob" placeholder="otherjob">
+    </div>
+    <br>
+    <div class="question">
+        <label>勤務先の名称</label>
+        <input class="check" type="text" placeholder="勤務先の名称" id="CpHonninKinmusakiName">
+        <span id="tsaddress"></span>
+    </div>
+    <br>
+    <div class="question">
+        <label>担保理由</label>
+        <input class="check" type="text" placeholder="担保理由" id="CpReason">
+        <span id="tsreason"></span>
+        <button type="button" class="button" id="tempsave">一時保存</button>
+    </div>
+    <br><br>
+    <div class="question">
+        <label>個人申請者と同じ</label>
+        <input type="radio" name="sameornot" value="同居" id="CpSame1">同居
+        <input type="radio" name="sameornot" value="別居" id="CpSame2">別居
+        <label class="applier">申請者名</label>
+        <input class="check applier" type="text" placeholder="申請者名" id="appliermei">
+        <label class="applier">申請者姓</label>
+        <input class="check applier" type="text" placeholder="申請者姓" id="appliersei">
+        <button type="button" class="button" id="checkname">check</button>
+        <input type="text" id="userid">
+    </div>
+    <br><br>
+    <div class="tijiao">
+        <button type="button" class="button" id="previous">戻る</button>
+        <button type="button" class="button" id="save">保存</button>
+        <button type="button" class="button" id="next">次へ</button>
+    </div>
+
+<!--JS-->
+    <script>
+        //获取输入框对象
+        let CpTanpoMonoInput = document.getElementById("CpTanpoMono");
+        let CpNameMeiInput = document.getElementById("CpNameMei");
+        let CpNameSeiInput = document.getElementById("CpNameSei");
+        let CpBirthDateYearInput = document.getElementById("CpBirthDateYear");
+        let CpBirthDateInput = document.getElementById("CpBirthDate");
+        let CpMoushikomiInput = document.getElementById("CpMoushikomi");
+        let CpRentaiSaimushaToOnajiInput = document.getElementById("CpRentaiSaimushaToOnaji");
+        let CpPhoneInput = document.getElementById("CpPhone");
+        let CpHonninShokugyoCodeInput = document.getElementById("CpHonninShokugyoCode");
+        let CpHonninKinmusakiNameInput = document.getElementById("CpHonninKinmusakiName");
+        let CpReasonInput = document.getElementById("CpReason");
+        CpReasonInput.value = localStorage.getItem("cpreasontemp").replace(/"/g,"");
+
+        let tempsavebutton = document.getElementById("tempsave");
+        let previousbutton = document.getElementById("previous");
+        let savebutton = document.getElementById("save");
+        let nextbutton = document.getElementById("next");
+        let checknamebutton = document.getElementById("checkname");
+        let useridInput = document.getElementById("userid")
+        let tsreason = document.getElementById("tsreason");
+
+        let cpsameornot = document.getElementsByName("sameornot");
+        let cpsame = '';
+        let appliersei = '';
+        let appliermei = '';
+        let applier = document.getElementsByClassName("applier");
+        for (let i = 0; i < applier.length; i++){
+            applier[i].style.display = 'none';
+        }
+
+        let task1info = document.getElementById("task1info");
+        task1info.innerHTML = "個人申請者 "+sessionStorage.getItem("applierxing").replace(/"/g,"")+sessionStorage.getItem("applierming").replace(/"/g,"");
+        //保存担保人信息
+        savebutton.addEventListener('click',()=> {
+            let cptanpomono = CpTanpoMonoInput.value.trim();
+            let cpnamemei = CpNameMeiInput.value.trim();
+            let cpnamesei = CpNameSeiInput.value.trim();
+            let cpbirthdateyear = CpBirthDateYearInput.value.trim();
+            let cpbirthdate = CpBirthDateInput.value.trim();
+            let cpmoushikomi = CpMoushikomiInput.value.trim();
+            let cprentaisaimushatoonaji = CpRentaiSaimushaToOnajiInput.value.trim();
+            let cpphone = CpPhoneInput.value.trim();
+            let cphonninshokugyocode = CpHonninShokugyoCodeInput.value.trim();
+            let cphonninkinmusakiname = CpHonninKinmusakiNameInput.value.trim();
+            let cpreason = CpReasonInput.value.trim();
+            let userid = useridInput.value.trim();
+            if (cpsameornot[0].checked) {
+                cpsame = '同居'
+            } else if (cpsameornot[1].checked) {
+                cpsame = '別居'
+            }
+            alert('get' + JSON.stringify({
+                cptanpomono,
+                cpnamemei,
+                cpnamesei,
+                cpbirthdateyear,
+                cpbirthdate,
+                cpmoushikomi,
+                cprentaisaimushatoonaji,
+                cpphone,
+                cphonninshokugyocode,
+                cphonninkinmusakiname,
+                cpreason,
+                cpsame,
+                userid
+            }))
+            fetch('/users/addguarantee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                //将数据转换成json形式传送
+                //データをjson形式で伝送
+                body: JSON.stringify({
+                    cptanpomono,
+                    cpnamemei,
+                    cpnamesei,
+                    cpbirthdateyear,
+                    cpbirthdate,
+                    cpmoushikomi,
+                    cprentaisaimushatoonaji,
+                    cpphone,
+                    cphonninshokugyocode,
+                    cphonninkinmusakiname,
+                    cpreason,
+                    cpsame,
+                    userid
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('保存成功');
+
+
+                    } else {
+                        return response.text().then(text => {
+                            throw new Error(text)
+                        });
+                    }
+                })
+                // 如果存在有问题的输入, 就alert提示错误
+                // 入力に異常がある場合、エラーで警告する
+                .catch(error => {
+                    alert(error.message);
+                })
+        })
+
+
+        //获取申请人姓名
+        //如果选择不同，显示申请人姓名
+        //如果选择相同，隐藏申请人姓名
+        document.getElementById("CpSame1").onclick = function (){
+            for (let i = 0; i < applier.length; i++){
+                applier[i].style.display = 'none';
+            }
+        }
+        document.getElementById("CpSame2").onclick = function (){
+            for (let i = 0; i < applier.length; i++){
+                applier[i].style.display = 'inline';
+            }
+        }
+        checknamebutton.onclick = function (){
+            if (cpsameornot[0].checked){
+                appliersei = CpNameSeiInput.value;
+                appliermei = CpNameMeiInput.value;
+            }else {
+                appliersei = document.getElementById("appliersei").value;
+                appliermei = document.getElementById("appliermei").value;
+            }
+            alert(appliersei + appliermei);
+            fetch('/users/queryapplier',{
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({xing:appliersei,ming:appliermei})
+            })
+                .then(response =>{
+                    if (response.ok){
+                        return response.text();
+                    }
+                    else {
+                        return response.text().then(text =>{
+                            throw new Error(text)
+                        })
+                    }
+                })
+                .then(data=>{
+                    if (data.length>2){
+                        let user1 = JSON.parse(data);
+                        useridInput.value = user1[0].id;
+                        alert('個人情報'+user1[0].id+' 姓名：'+user1[0].xing+user1[0].ming+' 国籍：'+user1[0].country+' 性别：'+user1[0].sex+' 生日：'+user1[0].birth+
+                            ' 电话：'+user1[0].tel+' 手机：'+user1[0].phone+' 工作：'+user1[0].job+' 公司地址：'+user1[0].address);
+                        if(document.getElementById("CpSame1").checked){
+                            CpPhoneInput.value = user1[0].phone
+                            CpPhoneInput.disabled = true
+                            CpHonninKinmusakiNameInput.value = user1[0].address
+                            CpHonninKinmusakiNameInput.disabled = true
+                        }
+                    }else{
+                        alert('Applier not found')
+                    }
+                })
+                .catch(error => {
+                    alert(error.message);
+                })
+        }
+
+
+        //自动获取年龄,未成年将无法输入
+        CpBirthDateYearInput.onblur = function (){
+            let nowDate = new Date();
+            let year = nowDate.getFullYear();
+            let month = nowDate.getMonth() + 1;
+            let day = nowDate.getDate();
+            month = (month > 9) ? month : ("0" + month);
+            day = (day < 10 ) ? ("0" + day) : day;
+            let today = year + "-" + month + "-" + day;
+            today = today.replace(/\-/g,'');
+            let birthdate = CpBirthDateYearInput.value.replace(/\-/g,'');
+            if (Math.floor((Number(today)-Number(birthdate))/10000) < 18){
+                CpBirthDateInput.value = "";
+                alert("age less than 18!");
+                return;
+            }
+            CpBirthDateInput.value = Math.floor((Number(today)-Number(birthdate))/10000);
+        }
+
+        //输入错误手机号，报告错误
+        CpPhoneInput.onchange = function (){
+            let tsphone = document.getElementById("tsphone");
+            if ((/^\d{11}$/).test(CpPhoneInput.value) === false){
+                alert('電話番号を11個数字で入力してください。');
+                tsphone.innerHTML = '電話番号を11個数字で入力してください。';
+            }else tsphone.innerHTML = '';
+        }
+        //担保理由输入不到50或者超过200字，报告错误
+        CpReasonInput.onblur = function (){
+            if ((/^[\d\D]{0,49}$/).test(CpReasonInput.value)){
+                alert('Reason less than 50 words');
+            }else if ((/^[\d\D]{201,}$/).test(CpReasonInput.value)){
+                alert('Reason more than 200 words');
+            }
+        }
+        //担保理由显示字数
+        CpReasonInput.oninput = function (){
+            tsreason.innerHTML = CpReasonInput.value.length;
+        }
+        //如果选择其他担保理由，则显示其他理由输入
+        //如果选择具体理由，隐藏其他理由输入
+        let othermoushikomi = document.getElementById("ohtermoushikomi");
+        othermoushikomi.style.display = 'none';
+        CpMoushikomiInput.onchange = function (){
+            if (CpMoushikomiInput.options[CpMoushikomiInput.selectedIndex].value==='その他'){
+                othermoushikomi.style.display = 'inline-block';
+            } else {
+                othermoushikomi.style.display = 'none';
+            }
+        }
+        //如果选择其他关系，则显示其他关系
+        //如果选择具体关系，隐藏其他输入
+        let otherrelation = document.getElementById("ohterrelation");
+        otherrelation.style.display = 'none';
+        CpRentaiSaimushaToOnajiInput.onchange = function (){
+            if (CpRentaiSaimushaToOnajiInput.options[CpRentaiSaimushaToOnajiInput.selectedIndex].value==='その他'){
+                otherrelation.style.display = 'inline-block';
+            } else {
+                otherrelation.style.display = 'none';
+            }
+        }
+        //如果选择其他关系，则显示其他关系
+        //如果选择具体关系，隐藏其他输入
+        let otherjob = document.getElementById("ohterjob");
+        otherjob.style.display = 'none';
+        CpHonninShokugyoCodeInput.onchange = function (){
+            if (this.options[this.selectedIndex].value==='その他'){
+                otherjob.style.display = 'inline-block';
+            } else {
+                otherjob.style.display = 'none';
+            }
+            // 选择无职，工作地点栏变灰，无法填信息。
+            // 無職を選択すると、勤務先の名称欄入力できない（灰色になって選択不可）
+            if (this.options[this.selectedIndex].value==="無職"){
+                CpHonninKinmusakiNameInput.disabled = true;
+            }else{
+                CpHonninKinmusakiNameInput.disabled = false;
+            }
+        }
+        //担保理由暂存
+        tempsavebutton.onclick = function (){
+            localStorage.setItem("cpreasontemp",JSON.stringify(CpReasonInput.value));
+            alert('tempsave success!');
+        }
+        //上一页按钮添加单击事件
+        previousbutton.addEventListener('click', () => {
+            window.location.href="task1.html"
+        });
+        //下一页按钮添加单击事件
+        nextbutton.addEventListener('click', () => {
+            sessionStorage.setItem("guaranteexing",JSON.stringify(CpNameSeiInput.value));
+            sessionStorage.setItem("guaranteeming",JSON.stringify(CpNameMeiInput.value));
+
+            window.location.href="task3.html"
+        });
+
+
+    </script>
+</body>
+</html>
