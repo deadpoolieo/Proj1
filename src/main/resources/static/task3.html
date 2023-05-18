@@ -24,8 +24,12 @@
             background-color: aquamarine;
         }
         td{
+            padding: 0 0 0 20px;
+            text-align: left;
             border: solid 0.2px;
             width: 300px;
+            height: 55px;
+            vertical-align: text-top;
         }
         th{
             border: solid 0.2px;
@@ -51,6 +55,22 @@
         }
         #userid{
             display: none;
+        }
+        select{
+            width: 210px;
+        }
+        input{
+            width: 200px;
+            text-align: right;
+        }
+        #whetherhasdifficulty{
+            width: auto;
+        }
+        #needtorebuild{
+            width: auto;
+        }
+        .error{
+            color:red;
         }
     </style>
 </head>
@@ -119,6 +139,8 @@
                 <td>敷地の面積（㎡）</td>
                 <td>
                     <input type="text" id="landarea">㎡
+                    <br>
+                    <span class="error" id="DBBukken_MensekiError"></span>
                 </td>
             </tr>
             <tr>
@@ -130,7 +152,49 @@
                         <option value="北海道">北海道</option>
                         <option value="大阪府">大阪府</option>
                         <option value="京都府">京都府</option>
-                        <option value="県">県</option>
+                        <option value="青森県">青森県</option>
+                        <option value="岩手県">岩手県</option>
+                        <option value="宮城県">宮城県</option>
+                        <option value="秋田県">秋田県</option>
+                        <option value="山形県">山形県</option>
+                        <option value="福島県">福島県</option>
+                        <option value="茨城県">茨城県</option>
+                        <option value="栃木県">栃木県</option>
+                        <option value="群馬県">群馬県</option>
+                        <option value="埼玉県">埼玉県</option>
+                        <option value="千葉県">千葉県</option>
+                        <option value="神奈川県">神奈川県</option>
+                        <option value="新潟県">新潟県</option>
+                        <option value="富山県">富山県</option>
+                        <option value="石川県">石川県</option>
+                        <option value="福井県">福井県</option>
+                        <option value="山梨県">山梨県</option>
+                        <option value="長野県">長野県</option>
+                        <option value="岐阜県">岐阜県</option>
+                        <option value="静岡県">静岡県</option>
+                        <option value="愛知県">愛知県</option>
+                        <option value="三重県">三重県</option>
+                        <option value="滋賀県">滋賀県</option>
+                        <option value="兵庫県">兵庫県</option>
+                        <option value="奈良県">奈良県</option>
+                        <option value="和歌山県">和歌山県</option>
+                        <option value="鳥取県">鳥取県</option>
+                        <option value="島根県">島根県</option>
+                        <option value="岡山県">岡山県</option>
+                        <option value="広島県">広島県</option>
+                        <option value="山口県">山口県</option>
+                        <option value="徳島県">徳島県</option>
+                        <option value="香川県">香川県</option>
+                        <option value="愛媛県">愛媛県</option>
+                        <option value="高知県">高知県</option>
+                        <option value="福岡県">福岡県</option>
+                        <option value="佐賀県">佐賀県</option>
+                        <option value="長崎県">長崎県</option>
+                        <option value="熊本県">熊本県</option>
+                        <option value="大分県">大分県</option>
+                        <option value="宮崎県">宮崎県</option>
+                        <option value="鹿児島県">鹿児島県</option>
+                        <option value="沖縄県">沖縄県</option>
                     </select>
                 </td>
             </tr>
@@ -156,6 +220,8 @@
                 <td>物件_敷地（所在地）_郵便番号</td>
                 <td>
                     <input id="addresspostcode">
+                    <br>
+                    <span class="error" id="APLBukkenAddressPostCode3Error"></span>
                 </td>
             </tr>
             <tr>
@@ -180,12 +246,16 @@
                 <td>建物の床面積_住宅部分</td>
                 <td>
                     <input id="tatemono_jutaku">㎡
+                    <br>
+                    <span class="error" id="DBBukken_Tatemono_JutakuError"></span>
                 </td>
             </tr>
             <tr>
                 <td>建物の床面積_非住宅部分</td>
                 <td>
                     <input id="tatemono_hijutaku">㎡
+                    <br>
+                    <span class="error" id="DBBukken_Tatemono_HijutakuError"></span>
                 </td>
             </tr>
             <tr>
@@ -310,6 +380,8 @@
                     <option value="2025">2025</option>
                     <option value="2026">2026</option>
                 </select>
+                <br>
+                <span class="error" id="shikindatetochishikinyearerror"></span>
             </td>
         </tr>
         <tr>
@@ -330,6 +402,8 @@
                     <option value="11">11</option>
                     <option value="12">12</option>
                 </select>
+                <br>
+                <span class="error" id="shikindatetochishikinmontherror"></span>
             </td>
         </tr>
         <tr>
@@ -343,6 +417,8 @@
                     <option value="2025">2025</option>
                     <option value="2026">2026</option>
                 </select>
+                <br>
+                <span class="error" id="shikindatechukanshikinyearerror"></span>
             </td>
         </tr>
         <tr>
@@ -363,6 +439,8 @@
                     <option value="11">11</option>
                     <option value="12">12</option>
                 </select>
+                <br>
+                <span class="error" id="shikindatechukanshikinmontherror"></span>
             </td>
         </tr>
         <tr>
@@ -376,6 +454,8 @@
                     <option value="2025">2025</option>
                     <option value="2026">2026</option>
                 </select>
+                <br>
+                <span class="error" id="shikindatesaishushikinyearerror"></span>
             </td>
         </tr>
         <tr>
@@ -396,6 +476,8 @@
                     <option value="11">11</option>
                     <option value="12">12</option>
                 </select>
+                <br>
+                <span class="error" id="shikindatesaishushikinmontherror"></span>
             </td>
         </tr>
         </tbody>
@@ -456,12 +538,16 @@
             <td>建設費（万円）</td>
             <td>
                 <input type="text" id="constructioncost">万円
+                <br>
+                <span class="error" id="DBHiyouKensetsuHiError"></span>
             </td>
         </tr>
         <tr>
             <td>土地取得費（万円）</td>
             <td>
                 <input type="text" id="landcost">万円
+                <br>
+                <span class="error" id="DBHiyouTochiSyotokuHiError"></span>
             </td>
         </tr>
         <tr>
@@ -484,24 +570,30 @@
             <td>借入希望額_借入金額</td>
             <td>
                 <input type="text" id="loanamount">万円
+                <br>
+                <span class="error" id="DBKariireGakuKingakuError"></span>
             </td>
         </tr>
         <tr>
             <td>借入希望額_金利(不能超过10.00)</td>
             <td>
                 <input type="text" id="landinterest">%
+                <br>
+                <span class="error" id="DBKariireGakuKinriError"></span>
             </td>
         </tr>
         <tr>
             <td>借入希望額_返済期間</td>
             <td>
                 <input type="text" id="borrowperiod">年
+                <br>
+                <span class="error" id="DBKariireGakuHensaiKikanError"></span>
             </td>
         </tr>
         <tr>
             <td>借入希望額_年間返済額の1/12</td>
             <td>
-                <input type="text" id="borrowhope">円
+                <input type="text" id="borrowhope" disabled>円
             </td>
         </tr>
         <tr>
@@ -557,18 +649,22 @@
                 <td>その他_借入金額（万円）</td>
                 <td>
                     <input type="text" id="otherloanamount">万円
+                    <br>
+                    <span class="error" id="DBSonotaKingakuError"></span>
                 </td>
             </tr>
             <tr>
                 <td>その他_返済期間（年）</td>
                 <td>
                     <input type="text" id="otherloanperiod">年
+                    <br>
+                    <span class="error" id="DBSonotaHensaiKikanError"></span>
                 </td>
             </tr>
             <tr>
                 <td>その他_年間返済額の1/12（円）</td>
                 <td>
-                    <input type="text" id="dbsonotanenhensai12no1">円
+                    <input type="text" id="dbsonotanenhensai12no1" disabled>円
                 </td>
             </tr>
             <tr>
@@ -697,8 +793,6 @@
                 if (data.length>2){
                     user1 = JSON.parse(data);
                     useridInput.value = user1[0].id;
-                    alert('個人情報'+user1[0].id+' 姓名：'+user1[0].xing+user1[0].ming+' 国籍：'+user1[0].country+' 性别：'+user1[0].sex+' 生日：'+user1[0].birth+
-                        ' 电话：'+user1[0].tel+' 手机：'+user1[0].phone+' 工作：'+user1[0].job+' 公司地址：'+user1[0].address);
                 }else{
                     alert('Applier not found')
                     return;
@@ -711,95 +805,72 @@
         savebutton.addEventListener('click',() =>{
             //输入检查
             let check1 = /^\d{1,5}$/g;
-            if (check1.test(dbbukkenmensekiinput.value)===false){
-                alert('Input right dbbukkenmenseki');
+            if (check1.test(dbbukkenmensekiinput.value)===false || dbbukkenmensekiinput.value==="0"){
+                alert('敷地の面積は整数0～9999');
                 return;
             }
             let check2 = /^\d{1,3}\.\d{0,2}$/g;
             if (check2.test(dbbukkentatemonojutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonojutakuinput.value)===false){
-                alert('Input right dbbukkentatemonojutaku');
+                alert('建物の床面積_住宅部分は0～999.99');
                 return;
             }
             let check3 = /^\d{1,3}\.\d{0,2}$/g;
             if (check3.test(dbbukkentatemonohijutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonohijutakuinput.value)===false){
-                alert('Input right dbbukkentatemonohijutaku');
+                alert('建物の床面積_住宅部分は0～999.99');
                 return;
             }
             let check4 = /^\d{1,15}$/g;
             if (check4.test(aplbukkenaddresspostcode3input.value)===false){
-                alert('Input right postcode');
+                alert('郵便番号は数字を入力してください');
                 return;
             }
             let check5 = /^\d{1,5}$/g;
             if (check5.test(dbhiyoukensetsuhiinput.value)===false){
-                alert('Input right dbhiyoukensetsuhi');
+                alert('建設費は整数0-99999');
                 return;
             }
             let check6 = /^\d{1,5}$/g;
             if (check6.test(dbhiyoutochisyotokuhiinput.value)===false){
-                alert('Input right dbhiyoutochisyotokuhi');
-                return;
-            }
-            let check7 = /^\d{1,6}$/g;
-            if (check7.test(dbhiyoutotalinput.value)===false){
-                alert('Input right dbhiyoutotal');
+                alert('土地取得費は整数0-99999');
                 return;
             }
             let check8 = /^\d{1,5}$/g;
             if (check8.test(dbkariiregakukingakuinput.value)===false){
-                alert('Input right dbkariiregakukingaku');
+                alert('借入希望額_借入金額は整数0-99999');
                 return;
             }
             let check9 = /^\d\.\d{0,2}$/g;
             if (check9.test(dbkariiregakukinriinput.value)===false){
-                alert('Input right dbkariiregakukinri');
+                alert('金利は0-10.00%');
                 return;
             }
             let check10 = /^\d{1,2}$/g;
             if (check10.test(dbkariiregakuhensaikikaninput.value)===false){
-                alert('Input right dbkariiregakuhensaikikan');
+                alert('返済期間は整数0-99');
                 return;
             }
-            let check11 = /^\d{1,9}$/g;
-            if (check11.test(dbkariiregakunenhensai12no1input.value)===false){
-
-            }
             //その他の借入内容入力したら、その他の借入内容は必須になる。
-            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ){
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value===''){
                 let check12 = /^\d{1,5}$/g;
                 if (check12.test(dbsonotakingakuinput.value)===false){
-                    alert('Input right dbsonotakingaku');
+                    alert('借入希望額_借入金額は整数0-99999');
                     return;
                 }
                 let check13 = /^\d{1,2}$/g;
                 if (check13.test(dbsonotahensaikikaninput.value)===false){
-                    alert('Input right dbsonotahensaikikan');
-                    return;
-                }
-                let check14 = /^\d{1,9}$/g;
-                if (check14.test(dbsonotanenhensai12no1input.value)===false){
-
-                }
-                let check15 = /^\d{1,6}$/g;
-                if (check15.test(dbhiyousonotatotalinput.value)===false){
-                    alert('Input right dbhiyousonotatotal');
-                    return;
-                }
-                let check16 = /^\d{1,6}$/g;
-                if (check16.test(dbsogokingakuinput.value)===false){
-                    alert('Input right dbsogokingaku');
+                    alert('返済期間は整数0-99');
                     return;
                 }
                 if (dbsonotanameinput.value===''){
-                    alert('Input right sonotaname');
+                    alert('その他_借入先名称等を入力してください');
                     return;
                 }
-                if (dbkinyukikannameinput.value===''){
-                    alert('Input right kinyukikanname');
+                if (dbsonotakingakuinput.value===''){
+                    alert('その他_借入金額を入力してください');
                     return;
                 }
-                if (dbshitemnameinput.value===''){
-                    alert('Input right shitemname');
+                if (dbsonotahensaikikaninput.value===''){
+                    alert('その他_返済期間を入力してください');
                     return;
                 }
             }
@@ -917,7 +988,7 @@
             }
             //建設に要する費用（再掲）と災害融資の借入希望額、その他の借入内容欄　は同じで保存される。
             if (dbsogokingakuinput.value !== dbhiyousonotatotalinput.value){
-                alert('建設に要する費用 != 災害融資の借入希望額、その他の借入内容');
+                alert('建設に要する費用（再掲）と災害融資の借入希望額、その他の借入内容欄　は同じで保存される');
                 return;
             }
 
@@ -1062,59 +1133,91 @@
 
         dbbukkenmensekiinput.onblur = function (){
             let check1 = /^\d{1,5}$/g;
-            if (check1.test(dbbukkenmensekiinput.value)===false){
-                alert('Input right dbbukkenmenseki');
+            let dbbukkenmensekierror = document.getElementById("DBBukken_MensekiError");
+            if (check1.test(dbbukkenmensekiinput.value)===false || dbbukkenmensekiinput.value==='0'){
+                dbbukkenmensekierror.innerHTML="敷地の面積は整数0～9999";
+            }else{
+                dbbukkenmensekierror.innerHTML="";
             }
         }
         dbbukkentatemonojutakuinput.onblur = function (){
-            let check2 = /^\d{1,3}\.\d{0,2}$/g;
+            let check2 = /^\d{1,3}(\.\d{1,2})?$/g;
+            let dbbukkentatemonojutakuerror = document.getElementById("DBBukken_Tatemono_JutakuError");
             let pointindex = dbbukkentatemonojutakuinput.value.indexOf("\.");
-            if (check2.test(dbbukkentatemonojutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonojutakuinput.value)===false){
-                alert('Input right dbbukkentatemonojutaku');
+            if (/^\d{1,3}$/g.test(dbbukkentatemonojutakuinput.value)){
+                dbbukkentatemonojutakuinput.value = dbbukkentatemonojutakuinput.value + '.00';
+            }
+            if (/^\d{1,3}\.\d$/g.test(dbbukkentatemonojutakuinput.value)){
+                dbbukkentatemonojutakuinput.value = dbbukkentatemonojutakuinput.value + '0';
+            }
+            if (check2.test(dbbukkentatemonojutakuinput.value)===false || dbbukkentatemonojutakuinput.value==="0"){
+                dbbukkentatemonojutakuerror.innerHTML="建物の床面積_住宅部分は0～999.99";
+            }else{
+                dbbukkentatemonojutakuerror.innerHTML="";
+            }
+            if (/^\d{1,3}\.\d{3,}$/g.test(dbbukkentatemonojutakuinput.value)){
                 dbbukkentatemonojutakuinput.value = dbbukkentatemonojutakuinput.value.substring(0,pointindex+3);
             }
         }
         dbbukkentatemonohijutakuinput.onblur = function (){
-            let check3 = /^\d{1,3}\.\d{0,2}$/g;
+            let check3 = /^\d{1,3}(\.\d{1,2})?$/g;
+            let dbbukkentatemonohijutakuerror = document.getElementById("DBBukken_Tatemono_HijutakuError")
             let pointindex = dbbukkentatemonohijutakuinput.value.indexOf("\.");
-            if (check3.test(dbbukkentatemonohijutakuinput.value)===false && /^\d{1,3}$/g.test(dbbukkentatemonohijutakuinput.value)===false){
-                alert('Input right dbbukkentatemonohijutaku');
+            if (/^\d{1,3}$/g.test(dbbukkentatemonohijutakuinput.value)){
+                dbbukkentatemonohijutakuinput.value = dbbukkentatemonohijutakuinput.value + '.00';
+            }
+            if (/^\d{1,3}\.\d$/g.test(dbbukkentatemonohijutakuinput.value)){
+                dbbukkentatemonohijutakuinput.value = dbbukkentatemonohijutakuinput.value + '0';
+            }
+            if (check3.test(dbbukkentatemonohijutakuinput.value)===false || dbbukkentatemonohijutakuinput.value==="0"){
+                dbbukkentatemonohijutakuerror.innerHTML="建物の床面積_住宅部分は0～999.99";
+            }else{
+                dbbukkentatemonohijutakuerror.innerHTML="";
+            }
+            if (/^\d{1,3}\.\d{3,}$/g.test(dbbukkentatemonohijutakuinput.value)){
                 dbbukkentatemonohijutakuinput.value = dbbukkentatemonohijutakuinput.value.substring(0,pointindex+3);
             }
         }
         aplbukkenaddresspostcode3input.onblur = function (){
             let check4 = /^\d{1,15}$/g;
+            let APLBukkenAddressPostCode3Error = document.getElementById("APLBukkenAddressPostCode3Error");
             if (check4.test(aplbukkenaddresspostcode3input.value)===false){
-                alert('Input right postcode');
+                APLBukkenAddressPostCode3Error.innerHTML = "郵便番号は数字を入力してください"
+            }else{
+                APLBukkenAddressPostCode3Error.innerHTML = "";
             }
         }
         dbhiyoukensetsuhiinput.onblur = function (){
             let check5 = /^\d{1,5}$/g;
+            let dbhiyoukensetsuhiError = document.getElementById("DBHiyouKensetsuHiError");
             if (check5.test(dbhiyoukensetsuhiinput.value)===false){
-                alert('Input right dbhiyoukensetsuhi');
+                dbhiyoukensetsuhiError.innerHTML = "建設費は整数0-99999";
+            }else {
+                dbhiyoukensetsuhiError.innerHTML = "";
             }
         }
         dbhiyoutochisyotokuhiinput.onblur = function (){
             let check6 = /^\d{1,5}$/g;
+            let dbhiyoutochisyotokuhiError = document.getElementById("DBHiyouTochiSyotokuHiError");
             if (check6.test(dbhiyoutochisyotokuhiinput.value)===false){
-                alert('Input right dbhiyoutochisyotokuhi');
-            }
-        }
-        dbhiyoutotalinput.onblur = function (){
-            let check7 = /^\d{1,6}$/g;
-            if (check7.test(dbhiyoutotalinput.value)===false){
-                alert('Input right dbhiyoutotal');
+                dbhiyoutochisyotokuhiError.innerHTML = "土地取得費は整数0-99999";
+            }else {
+                dbhiyoutochisyotokuhiError.innerHTML = "";
             }
         }
         dbkariiregakukingakuinput.onblur = function (){
             let check8 = /^\d{1,5}$/g;
+            let dbkariiregakukingakuError = document.getElementById("DBKariireGakuKingakuError");
             if (check8.test(dbkariiregakukingakuinput.value)===false){
-                alert('Input right dbkariiregakukingaku');
+                dbkariiregakukingakuError.innerHTML = "借入希望額_借入金額は整数0-99999";
+            }else {
+                dbkariiregakukingakuError.innerHTML = "";
             }
         }
         dbkariiregakukinriinput.onblur = function (){
             let check9 = /^\d\.\d{0,2}$/g;
             let pointindex = dbkariiregakukinriinput.value.indexOf("\.");
+            let dbkariiregakukinriError = document.getElementById("DBKariireGakuKinriError");
             if (/^\d$/g.test(dbkariiregakukinriinput.value)){
                 dbkariiregakukinriinput.value = dbkariiregakukinriinput.value + '.00';
             }
@@ -1124,8 +1227,10 @@
             if (check9.test(dbkariiregakukinriinput.value)===false){
                 dbkariiregakukinriinput.value = dbkariiregakukinriinput.value.substring(0,pointindex+3);
             }
-            if (parseFloat(dbkariiregakukinriinput.value) >= 10.0){
-                alert('Dbkariiregakukinri should < 10.00%');
+            if (parseFloat(dbkariiregakukinriinput.value) >= 10.0 || parseFloat(dbkariiregakukinriinput.value) <= 0.0){
+                dbkariiregakukinriError.innerHTML = "金利は0-10.00%";
+            }else{
+                dbkariiregakukinriError.innerHTML = "";
             }
             //年間返済額の1/12計算　　元金均等返済の場合 （1000000 * 金利 / 12 / 100  ）+ 1000000/（返済期間*12）
             //年間返済額の1/12計算　元利均等返済の場合 （1000000 * 金利 / 12 / 100  ）* pow （1+（金利 /12 /100），返済期間*12 ）
@@ -1146,8 +1251,9 @@
         }
         dbkariiregakuhensaikikaninput.onblur = function () {
             let check10 = /^\d{1,2}$/g;
+            let dbkariiregakuhensaikikanError = document.getElementById("DBKariireGakuHensaiKikanError");
             if (check10.test(dbkariiregakuhensaikikaninput.value) === false) {
-                alert('Input right dbkariiregakuhensaikikan');
+                dbkariiregakuhensaikikanError.innerHTML = "返済期間は整数0-99";
             }
         }
         dbkariiregakuhensaikikaninput.oninput = function (){
@@ -1176,52 +1282,30 @@
                 dbsonotanenhensai12no1input.value = ((parseFloat(dbkariiregakukinriinput.value) * 1000000 / 12 / 100) + 1000000 / (parseFloat(dbsonotahensaikikaninput.value) * 12)).toString();
             }
         }
-        dbkariiregakunenhensai12no1input.onblur = function (){
-            let check11 = /^\d{1,9}$/g;
-            if (check11.test(dbkariiregakunenhensai12no1input.value)===false){
-                alert('Input right dbkariiregakunenhensai12no1');
-            }
-        }
+
         dbsonotakingakuinput.onblur = function (){
-            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='') {
                 let check12 = /^\d{1,5}$/g;
+                let dbsonotakingakuError = document.getElementById("DBSonotaKingakuError");
                 if (check12.test(dbsonotakingakuinput.value) === false) {
-                    alert('Input right dbsonotakingaku');
+                    dbsonotakingakuError.innerHTML = "借入希望額_借入金額は整数0-99999";
+                }else{
+                    dbsonotakingakuError.innerHTML = ""
                 }
             }
         }
         dbsonotahensaikikaninput.onblur = function (){
-            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
+            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='') {
                 let check13 = /^\d{1,2}$/g;
+                let dbsonotahensaikikanError = document.getElementById("DBSonotaHensaiKikanError");
                 if (check13.test(dbsonotahensaikikaninput.value) === false) {
-                    alert('Input right dbsonotahensaikikan');
+                    dbsonotahensaikikanError.innerHTML = "返済期間は整数0-99";
+                }else {
+                    dbsonotahensaikikanError.innerHTML = "";
                 }
             }
         }
-        dbsonotanenhensai12no1input.onblur = function (){
-            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
-                let check14 = /^\d{1,9}$/g;
-                if (check14.test(dbsonotanenhensai12no1input.value) === false) {
-                    alert('Input right dbsonotanenhensai12no1');
-                }
-            }
-        }
-        dbhiyousonotatotalinput.onblur = function (){
-            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
-                let check15 = /^\d{1,6}$/g;
-                if (check15.test(dbhiyousonotatotalinput.value) === false) {
-                    alert('Input right dbhiyousonotatotal');
-                }
-            }
-        }
-        dbsogokingakuinput.onblur = function (){
-            if (dbsonotanameinput.value==='' || dbsonotakingakuinput.value==='' ||dbsonotahensaikikaninput.value==='' ||dbsonotanenhensai12no1input.value==='' ||dbhiyousonotatotalinput.value==='' ||dbsogokingakuinput.value==='' ||dbkinyukikannameinput.value==='' ||dbshitemnameinput.value==='' ) {
-                let check16 = /^\d{1,6}$/g;
-                if (check16.test(dbsogokingakuinput.value) === false) {
-                    alert('Input right dbsogokingaku');
-                }
-            }
-        }
+
         //被災住宅の種類（マイホーム）を選択したら、被災住宅の所有等欄（申込本人が所有している、上記以外）を表示される。
         let showoption1 = document.getElementById('show1');
         let showoption2 = document.getElementById('show2');
@@ -1360,7 +1444,43 @@
                 dbkariiregakunenhensai12no1input.value = '';
             }
         }
-
+        function timecompare(){
+            //土地先行資金の受取予定年月は、「中間資金の受取予定年月」「最終資金の受取予定年月」より後の年月を指定できません。
+            //中間資金の受取予定年月は、「最終資金の受取予定年月」より後の年月を指定できません。
+            let dbshikindatetochishiki = dbshikindatetochishikinyearinput.options[dbshikindatetochishikinyearinput.selectedIndex].value + dbshikindatetochishikinmonthinput.options[dbshikindatetochishikinmonthinput.selectedIndex].value;
+            let dbshikindatechukanshikin = dbshikindatechukanshikinyearinput.options[dbshikindatechukanshikinyearinput.selectedIndex].value + dbshikindatechukanshikinmonthinput.options[dbshikindatechukanshikinmonthinput.selectedIndex].value;
+            let dbshikindatesaishushikin = dbshikindatesaishushikinyearinput.options[dbshikindatesaishushikinyearinput.selectedIndex].value + dbshikindatesaishushikinmonthinput.options[dbshikindatesaishushikinmonthinput.selectedIndex].value;
+            let checkdate = /^\d{6}$/;
+            let dbshikindatetochishikinyearerror = document.getElementById("shikindatetochishikinyearerror");
+            let dbshikindatetochishikinmontherror = document.getElementById("shikindatetochishikinmontherror");
+            let dbshikindatechukanshikinyearerror = document.getElementById("shikindatechukanshikinyearerror");
+            let dbshikindatechukanshikinmontherror = document.getElementById("shikindatechukanshikinmontherror");
+            let dbshikindatesaishushikinyearerror = document.getElementById("shikindatesaishushikinyearerror");
+            let dbshikindatesaishushikinmontherror = document.getElementById("shikindatesaishushikinmontherror");
+            if (checkdate.test(dbshikindatetochishiki) && checkdate.test(dbshikindatechukanshikin) && checkdate.test(dbshikindatesaishushikin)){
+                if (dbshikindatetochishiki > dbshikindatechukanshikin){
+                    dbshikindatetochishikinyearerror.innerHTML = "先行資金" + dbshikindatetochishiki + "は中期資金" + dbshikindatechukanshikin + "より前にしてください";
+                }else{
+                    dbshikindatetochishikinyearerror.innerHTML = "";
+                }
+                if (dbshikindatetochishiki > dbshikindatesaishushikin){
+                    dbshikindatechukanshikinyearerror.innerHTML = "中期資金" + dbshikindatetochishiki + "は最終資金" + dbshikindatechukanshikin + "より前にしてください";
+                }else{
+                    dbshikindatechukanshikinyearerror.innerHTML = "";
+                }
+                if (dbshikindatechukanshikin > dbshikindatesaishushikin){
+                    dbshikindatesaishushikinyearerror.innerHTML = "先行資金" + dbshikindatetochishiki + "は最終資金" + dbshikindatechukanshikin + "より前にしてください";
+                }else{
+                    dbshikindatesaishushikinyearerror.innerHTML = "";
+                }
+            }
+        }
+        dbshikindatetochishikinyearinput.addEventListener("change",timecompare);
+        dbshikindatetochishikinmonthinput.addEventListener("change",timecompare);
+        dbshikindatechukanshikinyearinput.addEventListener("change",timecompare);
+        dbshikindatechukanshikinmonthinput.addEventListener("change",timecompare);
+        dbshikindatesaishushikinyearinput.addEventListener("change",timecompare);
+        dbshikindatesaishushikinmonthinput.addEventListener("change",timecompare);
 
         //上一页按钮添加单击事件
         previousbutton.addEventListener('click', () => {
